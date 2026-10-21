@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alimentação Saudável — Aula Divertida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --vermelho: #FF6B6B;
+    --vermelho-escuro: #E85555;
+    --verde: #52B788;
+    --verde-escuro: #2D8659;
+    --amarelo: #FFD166;
+    --azul: #4ECDC4;
+    --roxo: #9B5DE5;
+    --creme: #FFF9F0;
+    --creme-card: #FFFFFF;
+    --texto: #3A3A3A;
+    --texto-suave: #6b6b6b;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --creme: #241f18;
+      --creme-card: #33291d;
+      --texto: #f5ede0;
+      --texto-suave: #cbbfa9;
+    }
+  }
+  :root[data-theme="dark"]{
+    --creme: #241f18;
+    --creme-card: #33291d;
+    --texto: #f5ede0;
+    --texto-suave: #cbbfa9;
+  }
+
+  *{ box-sizing:border-box; }
+  html{
+    scroll-padding-top: env(safe-area-inset-top, 0px);
+  }
+  body{
+    margin:0;
+    background: var(--creme);
+    color: var(--texto);
+    font-family: 'Nunito', -apple-system, sans-serif;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family: 'Baloo 2', 'Nunito', sans-serif;
+    margin:0;
+  }
+  img, svg{ max-width:100%; }
+  section{
+    padding: 56px 20px;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .wide{ max-width: 1100px; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height: 92vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding: 40px 20px calc(60px + env(safe-area-inset-bottom, 0px));
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255,209,102,0.55), transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(82,183,136,0.45), transparent 45%),
+      var(--creme);
+    overflow:hidden;
+  }
+  .hero-emoji-bg span{
+    position:absolute;
+    font-size: 48px;
+    opacity:0.16;
+    filter: saturate(0.9);
+  }
+  .hero-title{
+    font-size: clamp(34px, 6vw, 64px);
+    font-weight: 800;
+    color: var(--verde-escuro);
+    line-height:1.08;
+    max-width: 820px;
+    position:relative;
+    z-index:2;
+  }
+  .hero-title .destaque{ color: var(--vermelho); }
+  .hero-sub{
+    margin-top:18px;
+    font-size: clamp(16px, 2.4vw, 20px);
+    color: var(--texto-suave);
+    font-weight:600;
+    max-width: 560px;
+    position:relative;
+    z-index:2;
+  }
+  .hero-plate{
+    margin-top: 34px;
+    position:relative;
+    z-index:2;
+  }
+  .scroll-hint{
+    position:absolute;
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    font-size: 14px;
+    font-weight:700;
+    color: var(--verde-escuro);
+    opacity:0.75;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+  }
+  .scroll-hint .seta{
+    font-size:20px;
+    animation: bounce 1.6s infinite;
+  }
+  @keyframes bounce{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(8px); }
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .eyebrow{
+    display:inline-block;
+    background: var(--amarelo);
+    color: #6b4c00;
+    font-weight:800;
+    font-family:'Baloo 2',sans-serif;
+    padding: 6px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+  .titulo-secao{
+    font-size: clamp(26px, 4vw, 38px);
+    color: var(--verde-escuro);
+    max-width: 640px;
+    line-height:1.15;
+  }
+  .texto-secao{
+    margin-top:14px;
+    font-size: 17px;
+    color: var(--texto-suave);
+    max-width: 620px;
+    line-height:1.65;
+    font-weight:600;
+  }
+
+  /* ---------- INTRO / O QUE É ---------- */
+  .intro{
+    display:flex;
+    gap: 40px;
+    align-items:center;
+    flex-wrap: wrap;
+  }
+  .intro-texto{ flex: 1 1 360px; }
+  .intro-figura{
+    flex: 1 1 280px;
+    display:flex;
+    justify-content:center;
+  }
+
+  /* ---------- COMPARAÇÃO ---------- */
+  .comparacao-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 34px;
+  }
+  @media (max-width: 680px){
+    .comparacao-grid{ grid-template-columns: 1fr; }
+  }
+  .coluna{
+    border-radius: 28px;
+    padding: 26px 22px 30px;
+    position:relative;
+    overflow:hidden;
+  }
+  .coluna.boa{
+    background: linear-gradient(160deg, #E8F8EF, #D4F3E1);
+    border: 3px solid var(--verde);
+  }
+  .coluna.ruim{
+    background: linear-gradient(160deg, #FFF0EE, #FFE1DD);
+    border: 3px solid var(--vermelho);
+  }
+  :root[data-theme="dark"] .coluna.boa,
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .coluna.boa{
+      background: linear-gradient(160deg, #1c3527, #16281f);
+  }}
+  .coluna-titulo{
+    font-size: 22px;
+    font-weight:800;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom: 6px;
+  }
+  .coluna.boa .coluna-titulo{ color: var(--verde-escuro); }
+  .coluna.ruim .coluna-titulo{ color: var(--vermelho-escuro); }
+  .coluna-sub{
+    font-size:14px;
+    font-weight:700;
+    color: var(--texto-suave);
+    margin-bottom: 18px;
+  }
+  .lista-alimentos{
+    display:flex;
+    flex-wrap:wrap;
+    gap: 10px;
+  }
+  .chip{
+    background: var(--creme-card);
+    border-radius: 16px;
+    padding: 10px 14px;
+    font-weight:700;
+    font-size: 14.5px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.06);
+  }
+  .chip .em{ font-size:20px; }
+
+  /* ---------- PRATO SAUDÁVEL ---------- */
+  .prato-section{
+    background: linear-gradient(180deg, transparent, rgba(82,183,136,0.08));
+  }
+  .prato-wrap{
+    display:flex;
+    gap: 44px;
+    align-items:center;
+    flex-wrap: wrap;
+    justify-content:center;
+    margin-top: 30px;
+  }
+  .prato-legenda{
+    display:flex;
+    flex-direction:column;
+    gap: 14px;
+    min-width: 240px;
+  }
+  .legenda-item{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    font-weight:700;
+    font-size: 15px;
+  }
+  .bolinha{
+    width: 18px; height:18px;
+    border-radius:50%;
+    flex-shrink:0;
+  }
+
+  /* ---------- JOGO ---------- */
+  .jogo-section{
+    text-align:center;
+  }
+  .jogo-card{
+    background: var(--creme-card);
+    border-radius: 32px;
+    padding: 36px 24px 30px;
+    max-width: 560px;
+    margin: 30px auto 0;
+    box-shadow: 0 10px 0 rgba(0,0,0,0.05), 0 20px 40px rgba(0,0,0,0.08);
+    position:relative;
+  }
+  .jogo-placar{
+    display:flex;
+    justify-content:center;
+    gap: 24px;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    font-size: 15px;
+    color: var(--texto-suave);
+    margin-bottom: 18px;
+  }
+  .jogo-placar b{ color: var(--verde-escuro); font-size:18px; }
+  .jogo-emoji{
+    font-size: 84px;
+    line-height:1;
+    margin: 6px 0 4px;
+    transition: transform 0.2s ease;
+  }
+  .jogo-nome{
+    font-family:'Baloo 2',sans-serif;
+    font-size: 22px;
+    font-weight:700;
+    margin-bottom: 22px;
+  }
+  .jogo-botoes{
+    display:flex;
+    gap: 14px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  .btn-jogo{
+    border:none;
+    cursor:pointer;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    font-size: 16px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    color:white;
+    transition: transform 0.12s ease;
+  }
+  .btn-jogo:active{ transform: scale(0.95); }
+  .btn-saudavel{ background: var(--verde); }
+  .btn-naosaudavel{ background: var(--vermelho); }
+  .jogo-feedback{
+    margin-top: 18px;
+    font-weight:700;
+    font-size: 15px;
+    min-height: 46px;
+    border-radius: 14px;
+    padding: 10px 14px;
+    display:none;
+  }
+  .jogo-feedback.mostrar{ display:block; }
+  .jogo-feedback.certo{ background:#E4F7EC; color: var(--verde-escuro); }
+  .jogo-feedback.errado{ background:#FDEAE8; color: var(--vermelho-escuro); }
+  .jogo-reiniciar{
+    margin-top: 16px;
+    background:none;
+    border: 2px solid var(--amarelo);
+    color:#6b4c00;
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    padding: 10px 22px;
+    border-radius: 999px;
+    cursor:pointer;
+    display:none;
+  }
+  .jogo-reiniciar.mostrar{ display:inline-block; }
+
+  /* ---------- DICAS ---------- */
+  .dicas-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 20px;
+    margin-top: 30px;
+  }
+  .dica-card{
+    background: var(--creme-card);
+    border-radius: 22px;
+    padding: 24px 20px;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.04);
+  }
+  .dica-emoji{ font-size: 34px; margin-bottom: 10px; }
+  .dica-titulo{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    font-size: 17px;
+    color: var(--verde-escuro);
+    margin-bottom: 6px;
+  }
+  .dica-texto{
+    font-size: 14px;
+    color: var(--texto-suave);
+    font-weight:600;
+    line-height:1.5;
+  }
+
+  /* ---------- FECHAMENTO ---------- */
+  .fechamento{
+    text-align:center;
+    background: linear-gradient(135deg, var(--verde), var(--azul));
+    border-radius: 36px;
+    padding: 50px 26px calc(46px + env(safe-area-inset-bottom, 0px));
+    color:white;
+    margin: 20px auto 60px;
+    max-width: 900px;
+  }
+  .fechamento h2{
+    font-size: clamp(24px,4vw,32px);
+  }
+  .fechamento p{
+    margin-top: 12px;
+    font-weight:700;
+    opacity:0.95;
+    max-width: 520px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .fechamento-emojis{
+    font-size: 38px;
+    margin-top: 20px;
+    letter-spacing: 6px;
+  }
+
+  footer{
+    text-align:center;
+    font-size: 13px;
+    color: var(--texto-suave);
+    padding: 20px 20px calc(30px + env(safe-area-inset-bottom, 0px));
+    opacity:0.6;
+  }
+</style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-emoji-bg" aria-hidden="true">
+      <span style="top:8%; left:8%;">🍎</span>
+      <span style="top:14%; right:10%;">🥦</span>
+      <span style="top:66%; left:6%;">🍩</span>
+      <span style="top:72%; right:8%;">🍇</span>
+      <span style="top:40%; left:2%;">🥕</span>
+      <span style="top:44%; right:3%;">🍟</span>
+    </div>
+    <h1 class="hero-title">Vamos aprender sobre <span class="destaque">alimentação</span> saudável!</h1>
+    <p class="hero-sub">Uma aula cheia de cores, exemplos e um joguinho para descobrir o que faz bem para o nosso corpo 🌱</p>
+
+    <svg class="hero-plate" width="220" height="220" viewBox="0 0 220 220">
+      <circle cx="110" cy="110" r="105" fill="#ffffff" stroke="#e9e2d3" stroke-width="3"/>
+      <path d="M110 110 L110 10 A100 100 0 0 1 205 140 Z" fill="#52B788"/>
+      <path d="M110 110 L205 140 A100 100 0 0 1 110 210 Z" fill="#FFD166"/>
+      <path d="M110 110 L110 210 A100 100 0 0 1 15 140 Z" fill="#FF6B6B"/>
+      <path d="M110 110 L15 140 A100 100 0 0 1 110 10 Z" fill="#4ECDC4"/>
+      <circle cx="110" cy="110" r="34" fill="#fff"/>
+      <text x="110" y="120" font-size="34" text-anchor="middle">🍽️</text>
+    </svg>
+
+    <div class="scroll-hint">
+      Role para descobrir mais
+      <span class="seta">⌄</span>
+    </div>
+  </div>
+
+  <!-- O QUE É -->
+  <section>
+    <span class="eyebrow">Vamos começar</span>
+    <div class="intro">
+      <div class="intro-texto">
+        <h2 class="titulo-secao">O que é comer de um jeito saudável?</h2>
+        <p class="texto-secao">
+          Comer de forma saudável é escolher, na maior parte das vezes, alimentos que dão
+          energia, ajudam o corpo a crescer forte e a mente a ficar esperta — como frutas,
+          verduras, legumes, arroz, feijão e carnes.
+        </p>
+        <p class="texto-secao">
+          Isso não significa nunca comer doce ou fast-food! Significa comer esses alimentos
+          <b>de vez em quando</b>, e não todos os dias.
+        </p>
+      </div>
+      <div class="intro-figura">
+        <svg width="260" height="220" viewBox="0 0 260 220">
+          <ellipse cx="130" cy="205" rx="90" ry="10" fill="#00000010"/>
+          <circle cx="70" cy="70" r="46" fill="#FF6B6B"/>
+          <rect x="66" y="18" width="8" height="18" rx="4" fill="#2D8659"/>
+          <ellipse cx="80" cy="30" rx="12" ry="7" fill="#52B788" transform="rotate(30 80 30)"/>
+          <circle cx="185" cy="80" r="38" fill="#FFD166"/>
+          <circle cx="185" cy="80" r="38" fill="none" stroke="#f1b83d" stroke-width="3"/>
+          <path d="M150 80 a35 35 0 0 1 70 0" fill="none" stroke="#f1b83d" stroke-width="2" stroke-dasharray="3 4"/>
+          <g transform="translate(90,130)">
+            <path d="M0 40 C0 10 20 0 40 0 C60 0 80 10 80 40 Z" fill="#52B788"/>
+            <path d="M40 0 C40 -18 30 -26 20 -30 C30 -22 34 -12 34 0 Z" fill="#2D8659"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARAÇÃO -->
+  <section class="wide">
+    <span class="eyebrow">Compare</span>
+    <h2 class="titulo-secao">Alimentos de todo dia x alimentos de vez em quando</h2>
+    <p class="texto-secao">Veja alguns exemplos dos dois grupos:</p>
+
+    <div class="comparacao-grid">
+      <div class="coluna boa">
+        <div class="coluna-titulo">🥗 Coma sempre que puder</div>
+        <div class="coluna-sub">Dão energia boa e ajudam o corpo a crescer</div>
+        <div class="lista-alimentos">
+          <div class="chip"><span class="em">🍎</span>Maçã</div>
+          <div class="chip"><span class="em">🥦</span>Brócolis</div>
+          <div class="chip"><span class="em">🍚</span>Arroz</div>
+          <div class="chip"><span class="em">🫘</span>Feijão</div>
+          <div class="chip"><span class="em">🥕</span>Cenoura</div>
+          <div class="chip"><span class="em">🍊</span>Laranja</div>
+          <div class="chip"><span class="em">🐟</span>Peixe</div>
+          <div class="chip"><span class="em">🥛</span>Leite</div>
+        </div>
+      </div>
+      <div class="coluna ruim">
+        <div class="coluna-titulo">🍭 Coma só de vez em quando</div>
+        <div class="coluna-sub">Têm muito açúcar, sal ou gordura</div>
+        <div class="lista-alimentos">
+          <div class="chip"><span class="em">🍬</span>Bala</div>
+          <div class="chip"><span class="em">🍟</span>Batata frita</div>
+          <div class="chip"><span class="em">🍩</span>Rosquinha</div>
+          <div class="chip"><span class="em">🥤</span>Refrigerante</div>
+          <div class="chip"><span class="em">🍕</span>Pizza</div>
+          <div class="chip"><span class="em">🍫</span>Chocolate</div>
+          <div class="chip"><span class="em">🌭</span>Cachorro-quente</div>
+          <div class="chip"><span class="em">🧁</span>Bolinho recheado</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRATO SAUDÁVEL -->
+  <section class="prato-section">
+    <span class="eyebrow">Monte seu prato</span>
+    <h2 class="titulo-secao">Como fica um prato equilibrado?</h2>
+    <p class="texto-secao">Uma boa forma de organizar sua refeição é dividir o prato assim:</p>
+
+    <div class="prato-wrap">
+      <svg width="240" height="240" viewBox="0 0 240 240">
+        <circle cx="120" cy="120" r="112" fill="#fdfaf3" stroke="#e9e2d3" stroke-width="4"/>
+        <path d="M120 120 L120 14 A106 106 0 0 1 208 172 Z" fill="#52B788"/>
+        <path d="M120 120 L208 172 A106 106 0 0 1 120 226 Z" fill="#FFD166"/>
+        <path d="M120 120 L120 226 A106 106 0 0 1 32 172 Z" fill="#FF6B6B"/>
+        <circle cx="120" cy="120" r="26" fill="#fdfaf3"/>
+      </svg>
+      <div class="prato-legenda">
+        <div class="legenda-item"><span class="bolinha" style="background:#52B788;"></span> Metade: verduras, legumes e frutas 🥬🍇</div>
+        <div class="legenda-item"><span class="bolinha" style="background:#FFD166;"></span> Um quarto: arroz, batata, pão, massas 🍞</div>
+        <div class="legenda-item"><span class="bolinha" style="background:#FF6B6B;"></span> Um quarto: carne, ovo, feijão, peixe 🍗</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOGO -->
+  <section class="jogo-section">
+    <span class="eyebrow">Hora de brincar</span>
+    <h2 class="titulo-secao">Jogo: saudável ou não saudável?</h2>
+    <p class="texto-secao" style="margin-left:auto;margin-right:auto;">
+      Veja o alimento e clique no botão certo. Vamos ver quantos você acerta!
+    </p>
+
+    <div class="jogo-card">
+      <div class="jogo-placar">
+        <span>✅ Acertos: <b id="placarAcertos">0</b></span>
+        <span>🍽️ Alimento: <b id="placarNumero">1</b>/10</span>
+      </div>
+      <div class="jogo-emoji" id="jogoEmoji">🍎</div>
+      <div class="jogo-nome" id="jogoNome">Maçã</div>
+      <div class="jogo-botoes">
+        <button class="btn-jogo btn-saudavel" onclick="responder(true)">Saudável ✅</button>
+        <button class="btn-jogo btn-naosaudavel" onclick="responder(false)">Não saudável ⚠️</button>
+      </div>
+      <div class="jogo-feedback" id="jogoFeedback"></div>
+      <button class="jogo-reiniciar" id="jogoReiniciar" onclick="reiniciarJogo()">Jogar de novo 🔄</button>
+    </div>
+  </section>
+
+  <!-- DICAS -->
+  <section>
+    <span class="eyebrow">Para lembrar</span>
+    <h2 class="titulo-secao">Dicas simples para o dia a dia</h2>
+    <div class="dicas-grid">
+      <div class="dica-card">
+        <div class="dica-emoji">💧</div>
+        <div class="dica-titulo">Beba água</div>
+        <div class="dica-texto">Prefira água em vez de refrigerante nas refeições.</div>
+      </div>
+      <div class="dica-card">
+        <div class="dica-emoji">🌈</div>
+        <div class="dica-titulo">Coma colorido</div>
+        <div class="dica-texto">Frutas e verduras de cores diferentes trazem vitaminas diferentes.</div>
+      </div>
+      <div class="dica-card">
+        <div class="dica-emoji">🍽️</div>
+        <div class="dica-titulo">Coma devagar</div>
+        <div class="dica-texto">Mastigar bem ajuda o corpo a perceber quando já está satisfeito.</div>
+      </div>
+      <div class="dica-card">
+        <div class="dica-emoji">🎉</div>
+        <div class="dica-titulo">Doce, às vezes</div>
+        <div class="dica-texto">Doces e frituras podem entrar de vez em quando, sem culpa!</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FECHAMENTO -->
+  <section>
+    <div class="fechamento">
+      <h2>Você é o dono da sua alimentação! 🌟</h2>
+      <p>Comer bem não é sobre ser perfeito — é sobre fazer boas escolhas na maior parte do
+      tempo e aproveitar os momentos especiais também.</p>
+      <div class="fechamento-emojis">🍎🥦🍚🫘🍊</div>
+    </div>
+  </section>
+
+  <footer>Aula de Educação Alimentar — Ensino Fundamental</footer>
+
+<script>
+  const alimentos = [
+    { nome: "Maçã", emoji: "🍎", saudavel: true, dica: "Frutas têm vitaminas e fibras que fazem muito bem!" },
+    { nome: "Batata frita", emoji: "🍟", saudavel: false, dica: "Frituras têm muita gordura — melhor comer de vez em quando." },
+    { nome: "Brócolis", emoji: "🥦", saudavel: true, dica: "Verduras verdes são cheias de vitaminas e minerais!" },
+    { nome: "Refrigerante", emoji: "🥤", saudavel: false, dica: "Tem muito açúcar — a água é sempre a melhor escolha." },
+    { nome: "Feijão", emoji: "🫘", saudavel: true, dica: "O feijão tem proteína e ferro, ótimo para o crescimento!" },
+    { nome: "Rosquinha", emoji: "🍩", saudavel: false, dica: "Doces são gostosos, mas devem ser raros no dia a dia." },
+    { nome: "Cenoura", emoji: "🥕", saudavel: true, dica: "A cenoura é rica em vitamina A, boa para os olhos!" },
+    { nome: "Pizza", emoji: "🍕", saudavel: false, dica: "Pizza pode entrar de vez em quando, não todo dia." },
+    { nome: "Peixe", emoji: "🐟", saudavel: true, dica: "Peixes têm proteínas e gorduras boas para o cérebro!" },
+    { nome: "Chocolate", emoji: "🍫", saudavel: false, dica: "Chocolate é um docinho para ocasiões especiais." }
+  ];
+
+  let ordem = [];
+  let indiceAtual = 0;
+  let acertos = 0;
+
+  function embaralhar(lista){
+    const copia = [...lista];
+    for(let i = copia.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [copia[i], copia[j]] = [copia[j], copia[i]];
+    }
+    return copia;
+  }
+
+  function iniciarJogo(){
+    ordem = embaralhar(alimentos);
+    indiceAtual = 0;
+    acertos = 0;
+    document.getElementById('placarAcertos').textContent = acertos;
+    document.getElementById('jogoReiniciar').classList.remove('mostrar');
+    mostrarAlimentoAtual();
+  }
+
+  function mostrarAlimentoAtual(){
+    const fb = document.getElementById('jogoFeedback');
+    fb.classList.remove('mostrar','certo','errado');
+    fb.textContent = '';
+
+    if(indiceAtual >= ordem.length){
+      document.getElementById('jogoEmoji').textContent = '🏆';
+      document.getElementById('jogoNome').textContent = 'Fim de jogo!';
+      document.querySelector('.jogo-botoes').style.display = 'none';
+      fb.classList.add('mostrar','certo');
+      fb.textContent = 'Você acertou ' + acertos + ' de ' + ordem.length + '! Parabéns por aprender sobre alimentação saudável 🎉';
+      document.getElementById('jogoReiniciar').classList.add('mostrar');
+      return;
+    }
+
+    document.querySelector('.jogo-botoes').style.display = 'flex';
+    const item = ordem[indiceAtual];
+    document.getElementById('jogoEmoji').textContent = item.emoji;
+    document.getElementById('jogoNome').textContent = item.nome;
+    document.getElementById('placarNumero').textContent = (indiceAtual + 1);
+  }
+
+  function responder(respostaSaudavel){
+    const item = ordem[indiceAtual];
+    const fb = document.getElementById('jogoFeedback');
+    const correto = (respostaSaudavel === item.saudavel);
+
+    if(correto){
+      acertos++;
+      document.getElementById('placarAcertos').textContent = acertos;
+      fb.classList.add('mostrar','certo');
+      fb.textContent = '✅ Isso mesmo! ' + item.dica;
+    } else {
+      fb.classList.add('mostrar','errado');
+      const correta = item.saudavel ? 'saudável' : 'não saudável (coma só de vez em quando)';
+      fb.textContent = '💡 Quase! ' + item.nome + ' é ' + correta + '. ' + item.dica;
+    }
+
+    indiceAtual++;
+    setTimeout(mostrarAlimentoAtual, 1900);
+  }
+
+  function reiniciarJogo(){
+    document.querySelector('.jogo-botoes').style.display = 'flex';
+    iniciarJogo();
+  }
+
+  iniciarJogo();
+</script>
+
+</body>
+</html>
